@@ -37,6 +37,13 @@ namespace OnlineLibrary.Pages
                 var user = await libraryDbContext.Users
                     .FirstOrDefaultAsync(u => u.Email == LoginInput.Email);
 
+                if (user == null)
+                {
+                    logger.LogInformation("Login failed: User does not exist.");
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return Page();
+                }
+
                 if (user != null && BCrypt.Net.BCrypt.Verify(LoginInput.Password, user.PasswordHash))
                 {
                     var claims = new List<Claim>
@@ -51,7 +58,7 @@ namespace OnlineLibrary.Pages
 
                     var authProperties = new AuthenticationProperties
                     {
-                        // Configure your authentication properties as needed
+                        IsPersistent = false
                     };
 
                     await HttpContext.SignInAsync(
@@ -72,12 +79,7 @@ namespace OnlineLibrary.Pages
             return Page();
         }
 
-        private bool VerifyPasswordHash(string password, string storedHash)
-        {
-            // Implement password verification logic here
-            // You can use a library like BCrypt or the built-in `PasswordHasher<T>`
-            return password == storedHash; // Replace this with actual verification
-        }
+    
     }
 
 }

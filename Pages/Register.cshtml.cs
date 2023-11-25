@@ -35,10 +35,17 @@ namespace OnlineLibrary.Pages
 
                 };
 
-                libraryDbContext.Users.Add(user);
-                await libraryDbContext.SaveChangesAsync();
+                if(libraryDbContext.Users.FirstOrDefault(u => u.Email == user.Email) == null)
+                {
+                    libraryDbContext.Users.Add(user);
+                    await libraryDbContext.SaveChangesAsync();
 
-                return RedirectToPage("/Login");
+                    return RedirectToPage("/Login");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Email already in use for another account");
+                }
             }
 
             return Page();
