@@ -1,0 +1,31 @@
+﻿@page
+@model OnlineLibrary.Pages.RegisterModel
+@{
+}
+
+<div>
+    <form method="post">
+        <div>
+            <label asp-for="RegisterInput.Email">Personal email:</label>
+            <input asp-for="RegisterInput.Email" class="form-control" />
+            <span asp-validation-for="RegisterInput.Email" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="RegisterInput.Password">Password:</label>
+            <input asp-for="RegisterInput.Password" type="password" class="form-control" />
+            <span asp-validation-for="RegisterInput.Password" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="RegisterInput.Authority">Choose what type of account you would like to have:</label>
+            <select asp-for="RegisterInput.Authority" class="form-control">
+                <option value="Reader">Reader</option>
+                <option value="Author">Author</option>
+            </select>
+            <span asp-validation-for="RegisterInput.Authority" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
