@@ -66,6 +66,13 @@ namespace OnlineLibrary.Pages
                         new ClaimsPrincipal(claimsIdentity),
                         authProperties);
 
+                    var httpClaims = HttpContext.User.Claims;
+
+                    foreach (var claim in httpClaims)
+                    {
+                        logger.LogInformation($"Claim Type: {claim.Type}, Claim Value: {claim.Value}");
+                    }
+
                     return LocalRedirect("/index");
                 }
                 else

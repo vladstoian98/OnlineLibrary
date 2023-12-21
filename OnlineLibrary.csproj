@@ -20,7 +20,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Helper\" />
     <Folder Include="Migrations\" />
+    <Folder Include="wwwroot\pdfs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\AddBook.css" />
   </ItemGroup>
 
 </Project>

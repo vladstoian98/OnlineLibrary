@@ -1,0 +1,29 @@
+﻿@page
+@model OnlineLibrary.Pages.AddBookModel
+@{
+    <head>
+        <link rel="stylesheet" href="/css/AddBook.css">
+    </head>
+
+    <div class="centerform">
+        <form method="post" enctype="multipart/form-data">
+            <input asp-for="Book.Title" type="text" placeholder="Title" />
+            <span asp-validation-for="Book.Title" class="text-danger"></span>
+
+            <input asp-for="Book.Author" type="text" placeholder="Author" />
+            <span asp-validation-for="Book.Author" class="text-danger"></span>
+
+            <input asp-for="Book.Genre" type="text" placeholder="Genre" />
+            <span asp-validation-for="Book.Genre" class="text-danger"></span>
+
+            <input asp-for="Book.AddDate" type="date" />
+            <span asp-validation-for="Book.AddDate" class="text-danger"></span>
+
+            <input asp-for="Book.UploadedPdf" type="file" accept=".pdf" />
+            <span asp-validation-for="Book.UploadedPdf" class="text-danger"></span>
+
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+}

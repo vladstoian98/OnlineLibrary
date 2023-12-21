@@ -1,0 +1,22 @@
+﻿
+
+.centerform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 40vh;
+}
+
+.centerform form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.centerform input,
+.centerform button {
+    width: 80%; /* Adjust the width as needed */
+    margin: 5px 0;
+}

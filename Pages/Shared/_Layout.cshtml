@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims;
+
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -37,6 +41,13 @@
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Login">Login</a>
                             </li>
                         }
+                        @if (User.Identity.IsAuthenticated && ViewContext.HttpContext.User.Claims.ElementAtOrDefault(1).Value == "Author")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/AddBook">Add a new book</a>
+                            </li>
+                        }
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>

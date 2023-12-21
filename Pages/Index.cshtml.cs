@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
 
 namespace OnlineLibrary.Pages
 {
@@ -16,7 +17,13 @@ namespace OnlineLibrary.Pages
 
         public void OnGet()
         {
+            // Place a breakpoint here and inspect HttpContext.User.
+            var isAuthenticated = User.Identity.IsAuthenticated;
+            var userName = User.Identity.Name; // This should be the user's email in your case.
 
+            var httpClaims = HttpContext.User.Claims;
+
+            
         }
 
         public async Task<IActionResult> OnPostLogoutAsync()
