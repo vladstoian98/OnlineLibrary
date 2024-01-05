@@ -47,6 +47,12 @@
                                 <a class="nav-link text-dark" asp-area="" asp-page="/AddBook">Add a new book</a>
                             </li>
                         }
+                        else if(User.Identity.IsAuthenticated && ViewContext.HttpContext.User.Claims.ElementAtOrDefault(1).Value == "Admin")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/bookmoderation">Delete books from database</a>
+                            </li>
+                        }
 
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>

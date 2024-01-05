@@ -28,20 +28,28 @@ namespace OnlineLibrary.Pages
             IsAuthor = User.Identity.IsAuthenticated && HttpContext.User.Claims.ElementAtOrDefault(1).Value == "Author";
         }
 
-        public void OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             if (Book.UploadedPdf != null && Book.UploadedPdf.Length > 0)
             {
-                // Generate a unique file name
-                var fileName = Path.Combine("wwwroot/pdfs", $"{Guid.NewGuid()}_{Book.UploadedPdf.FileName}");
-
                 // Save the PDF file
-                using (var stream = new FileStream(fileName, FileMode.Create))
+                var folderName = Path.Combine("wwwroot", "pdfs");
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+
+                if (!Directory.Exists(filePath))
+                {
+                    Directory.CreateDirectory(filePath);
+                }
+
+                var fileName = $"{Guid.NewGuid()}_{Book.UploadedPdf.FileName}";
+                var fullPath = Path.Combine(filePath, fileName);
+
+                using (var stream = new FileStream(fullPath, FileMode.Create))
                 {
                     Book.UploadedPdf.CopyTo(stream);
                 }
 
-                Book.PdfPath = fileName;
+                Book.PdfPath = Path.Combine("pdfs", fileName);
 
                 libraryDbContext.Books.Add(Book);
 
@@ -49,8 +57,10 @@ namespace OnlineLibrary.Pages
 
                 libraryDbContext.SaveChanges();
 
-                RedirectToPage("/index");
+             
             }
+
+            return RedirectToPage("/index");
         }
     }
 }

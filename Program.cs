@@ -24,6 +24,9 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("RequireAuthorRole", policy =>
         policy.RequireClaim("Authority", "Author"));
+
+    options.AddPolicy("RequireAdminRole", policy =>
+        policy.RequireClaim("Authority", "Admin"));
 });
 
 
