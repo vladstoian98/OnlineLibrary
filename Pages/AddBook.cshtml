@@ -1,29 +1,43 @@
 ﻿@page
 @model OnlineLibrary.Pages.AddBookModel
 @{
-    <head>
-        <link rel="stylesheet" href="/css/AddBook.css">
-    </head>
-
-    <div class="centerform">
-        <form method="post" enctype="multipart/form-data">
-            <input asp-for="Book.Title" type="text" placeholder="Title" />
-            <span asp-validation-for="Book.Title" class="text-danger"></span>
-
-            <input asp-for="Book.Author" type="text" placeholder="Author" />
-            <span asp-validation-for="Book.Author" class="text-danger"></span>
-
-            <input asp-for="Book.Genre" type="text" placeholder="Genre" />
-            <span asp-validation-for="Book.Genre" class="text-danger"></span>
-
-            <input asp-for="Book.AddDate" type="date" />
-            <span asp-validation-for="Book.AddDate" class="text-danger"></span>
-
-            <input asp-for="Book.UploadedPdf" type="file" accept=".pdf" />
-            <span asp-validation-for="Book.UploadedPdf" class="text-danger"></span>
-
-            <button type="submit">Upload</button>
-        </form>
-    </div>
-
+    ViewData["Title"] = "Add Book";
 }
+
+<form method="post" enctype="multipart/form-data">
+    <fieldset>
+        <legend>Add New Book</legend>
+
+        <div class="form-group">
+            <label for="BookTitle" class="form-label mt-4">Title</label>
+            <input asp-for="Book.Title" type="text" class="form-control" id="BookTitle" placeholder="Enter Title" />
+            <span asp-validation-for="Book.Title" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="BookAuthor" class="form-label mt-4">Author</label>
+            <input asp-for="Book.Author" type="text" class="form-control" id="BookAuthor" placeholder="Enter Author's Name" />
+            <span asp-validation-for="Book.Author" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="BookGenre" class="form-label mt-4">Genre</label>
+            <input asp-for="Book.Genre" type="text" class="form-control" id="BookGenre" placeholder="Enter Genre" />
+            <span asp-validation-for="Book.Genre" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="BookAddDate" class="form-label mt-4">Add Date</label>
+            <input asp-for="Book.AddDate" type="date" class="form-control" id="BookAddDate" />
+            <span asp-validation-for="Book.AddDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="BookPdf" class="form-label mt-4">Upload PDF</label>
+            <input asp-for="Book.UploadedPdf" type="file" class="form-control" id="BookPdf" accept=".pdf" />
+            <span asp-validation-for="Book.UploadedPdf" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4">Upload</button>
+    </fieldset>
+</form>

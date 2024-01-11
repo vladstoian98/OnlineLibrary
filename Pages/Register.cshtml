@@ -1,31 +1,36 @@
 ﻿@page
 @model OnlineLibrary.Pages.RegisterModel
 @{
+    ViewData["Title"] = "Register";
 }
 
-<div asp-validation-summary="All" class="text-danger">
-    <form method="post">
-        <div>
-            <label asp-for="RegisterInput.Email">Personal email:</label>
+<form method="post">
+    <fieldset>
+        <legend>Register</legend>
+
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+        <div class="form-group">
+            <label asp-for="RegisterInput.Email" class="form-label mt-4">Personal Email:</label>
             <input asp-for="RegisterInput.Email" class="form-control" />
             <span asp-validation-for="RegisterInput.Email" class="text-danger"></span>
         </div>
 
-        <div>
-            <label asp-for="RegisterInput.Password">Password:</label>
+        <div class="form-group">
+            <label asp-for="RegisterInput.Password" class="form-label mt-4">Password:</label>
             <input asp-for="RegisterInput.Password" type="password" class="form-control" />
             <span asp-validation-for="RegisterInput.Password" class="text-danger"></span>
         </div>
 
-        <div>
-            <label asp-for="RegisterInput.Authority">Choose what type of account you would like to have:</label>
-            <select asp-for="RegisterInput.Authority" class="form-control">
+        <div class="form-group">
+            <label asp-for="RegisterInput.Authority" class="form-label mt-4">Account Type:</label>
+            <select asp-for="RegisterInput.Authority" class="form-select">
                 <option value="Reader">Reader</option>
                 <option value="Author">Author</option>
             </select>
             <span asp-validation-for="RegisterInput.Authority" class="text-danger"></span>
         </div>
 
-        <button type="submit" class="btn btn-primary">Register</button>
-    </form>
-</div>
+        <button type="submit" class="btn btn-primary mt-4">Register</button>
+    </fieldset>
+</form>

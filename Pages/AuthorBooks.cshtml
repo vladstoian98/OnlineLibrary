@@ -1,0 +1,46 @@
+﻿@page "{authorName}"
+@model OnlineLibrary.Pages.AuthorBooksModel
+@{
+    ViewData["Title"] = "Books by " + Model.AuthorName;
+}
+
+<style>
+    .author-books {
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+</style>
+
+<h1 class="author-books"><i class="bi bi-book-half"></i> Books by @Model.AuthorName</h1>
+
+@if (Model.Books.Any())
+{
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Added Date</th>
+                <th scope="col">Download PDF</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model.Books)
+            {
+                <tr class="table-primary">
+                    <td>@book.Title</td>
+                    <td>@book.Genre</td>
+                    <td>@book.AddDate.ToString("d")</td>
+                    <td>
+                        <a href="@Model.GetPdfDownloadUrl(book.PdfPath)" class="btn btn-primary" download>Download</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No books found for this author.</p>
+}

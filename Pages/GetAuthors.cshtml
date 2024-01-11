@@ -1,0 +1,40 @@
+﻿@page
+@model OnlineLibrary.Pages.GetAuthorsModel
+@{
+    ViewData["Title"] = "Authors";
+}
+
+<style>
+    .authors-title {
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+</style>
+
+<h1 class="authors-title"><i class="bi bi-pen"></i> Authors</h1>
+
+@if (Model.Authors.Any())
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Author Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var author in Model.Authors)
+            {
+                var encodedAuthor = System.Net.WebUtility.UrlEncode(author).Replace("+", "%20");
+                <tr class="table-primary">
+                    <td>
+                        <a href="/AuthorBooks/@encodedAuthor">@author</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No authors found.</p>
+}
