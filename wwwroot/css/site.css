@@ -21,3 +21,39 @@ body {
   margin-bottom: 60px;
 }
 
+.wheel-container {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.wheel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: absolute;
+    border: 2px solid #000;
+}
+
+.segment {
+    --rotate: 0;
+    --rotate-inverse: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    text-align: center;
+    transform-origin: 50% 50%;
+    transform: rotate(var(--rotate)) translate(0, -50%);
+}
+
+#spinButton {
+    display: block;
+    margin: 20px auto;
+}
+
+#selectedBook {
+    text-align: center;
+    margin-top: 20px;
+}

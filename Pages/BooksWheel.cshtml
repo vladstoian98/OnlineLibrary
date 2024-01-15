@@ -1,0 +1,57 @@
+﻿@page
+@model OnlineLibrary.Pages.BooksWheelModel
+@{
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #spinButton {
+            display: block;
+            margin: 20px auto;
+        }
+
+        #wheelImage {
+            width: 300px;
+            height: 300px;
+            margin: auto;
+            display: block;
+        }
+
+        #selectedBook {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <img id="wheelImage" src="/photos/roata.png" alt="Spinning Wheel">
+    <button id="spinButton">Spin the Wheel</button>
+    <div id="selectedBook"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const books = @Html.Raw(Json.Serialize(Model.Books.Select(b => b.Title)));
+            const wheelImage = document.getElementById('wheelImage');
+            const selectedBookDiv = document.getElementById('selectedBook');
+
+            document.getElementById("spinButton").addEventListener("click", function () {
+                let spinDegrees = Math.floor(Math.random() * 360) + 720; // Random spin
+                wheelImage.style.transition = 'transform 4s ease-out';
+                wheelImage.style.transform = 'rotate(' + spinDegrees + 'deg)';
+
+                setTimeout(function () {
+                    let randomBookIndex = Math.floor(Math.random() * books.length);
+                    let selectedBook = books[randomBookIndex];
+                    selectedBookDiv.innerText = `Selected Book: ${selectedBook}`;
+
+                    // Reset the wheel image for next spin
+                    wheelImage.style.transition = 'none';
+                    wheelImage.style.transform = 'rotate(0deg)';
+                }, 4000); // 4 seconds for the spin to end
+            });
+        });
+    </script>
+</body>
+</html>

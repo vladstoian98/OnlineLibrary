@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OnlineLibrary.Data;
 
 namespace OnlineLibrary.Pages
 {
+    [Authorize]
     public class GetAuthorsModel : PageModel
     {
         private readonly LibraryDbContext libraryDbContext;
